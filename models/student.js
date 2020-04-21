@@ -4,18 +4,24 @@ const crypto = require('crypto');
 const uuidv1 = require("uuid/v1");
 
 
-//User Schema
-var userSchema = new Schema({
+//Student Schema
+var studentSchema = new Schema({
     name: {
         type: String,
         required: true,
         maxlength: 32,
         trim: true
     },
-    lastname:{
-        type: String,
+    roll_no:{
+        type: Number,
         maxlength: 32,
         trim: true
+    },
+    year:{
+        type: Number,
+        min:1,
+        max:4,
+        default:1
     },
     email:{
         type: String,
@@ -23,29 +29,29 @@ var userSchema = new Schema({
         required: true,
         unique: true
     },
-    userinfo:{
+    room_no:{
+        type: Number,
+        required: true,
+        trim: true
+    },
+    address:{
         type: String,
         trim: true
+    },
+    img:{ data: Buffer,
+        contentType: String
     },
    encry_password:{
        type: String,
        required: true
    },
    salt: String,
-   role:{
-       type: Number,
-       default: 0
-   },
-   purchases: {
-       type: Array,
-       default: []
-   }   
 },{
     timestamps:true
 });
 
 //virtual
-userSchema.virtual("password")
+studentSchema.virtual("password")
     .set(function(password){
         this._password = password
         this.salt = uuidv1();
@@ -57,7 +63,7 @@ userSchema.virtual("password")
 
 
 //password
-userSchema.methods = {
+studentSchema.methods = {
     authenticate: function(plainpassword){
         return this.securePassword(plainpassword) === this.encry_password
     },
@@ -72,4 +78,4 @@ userSchema.methods = {
         }
     }
 }
-module.exports = mongoose.model("User", userSchema)
+module.exports = mongoose.model("student", studentSchema)
