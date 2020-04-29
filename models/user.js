@@ -3,9 +3,7 @@ var Schema = mongoose.Schema;
 const crypto = require('crypto');
 const uuidv1 = require("uuid/v1");
 
-
-//Student Schema
-var studentSchema = new Schema({
+var userSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -31,7 +29,6 @@ var studentSchema = new Schema({
     },
     room_no:{
         type: Number,
-        required: true,
         trim: true
     },
     address:{
@@ -78,4 +75,4 @@ studentSchema.methods = {
         }
     }
 }
-module.exports = mongoose.model("student", studentSchema)
+module.exports = mongoose.model("User", userSchema)
