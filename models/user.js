@@ -27,6 +27,10 @@ var userSchema = new Schema({
         required: true,
         unique: true
     },
+    role:{
+        type:Number,
+        default:0
+    },
     room_no:{
         type: Number,
         trim: true
@@ -48,7 +52,7 @@ var userSchema = new Schema({
 });
 
 //virtual
-studentSchema.virtual("password")
+userSchema.virtual("password")
     .set(function(password){
         this._password = password
         this.salt = uuidv1();
@@ -60,7 +64,7 @@ studentSchema.virtual("password")
 
 
 //password
-studentSchema.methods = {
+userSchema.methods = {
     authenticate: function(plainpassword){
         return this.securePassword(plainpassword) === this.encry_password
     },
