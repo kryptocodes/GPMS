@@ -33,3 +33,9 @@ exports.signin = (req,res) => {
     });
     
 };
+
+export.signout = (req,res) => {
+    res.json({
+        message:"User signout";
+    })
+}
