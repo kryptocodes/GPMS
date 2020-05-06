@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
+//myRoutes
+const authRoutes = require("./routes/auth");
+
 //dB connection
 mongoose.connect(process.env.DATABASE,{
     useNewUrlParser: true,
