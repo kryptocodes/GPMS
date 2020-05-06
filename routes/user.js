@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router();
 
 
-const {getUserById,getUser,updateUser} = require("../controller/user")
-const {isSignedIn,isAuthenicated,isFaculty} = require("../controller/faculty")
+const {getUserById,getUser,updateUser} = require("../controllers/user")
+const {isSignedIn,isAuthenticated} = require("../controllers/auth")
 
 router.param("userId",getUserById)
-router.get9"/user.:userId",isSignedIn,isAuthenicated, getUser)
+router.get("/user/:userId",isSignedIn,isAuthenticated, getUser)
+router.put("/user/:userId",isSignedIn,isAuthenticated,updateUser)
 
-module.exports = router
+module.exports = router;
