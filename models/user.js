@@ -13,7 +13,8 @@ var userSchema = new Schema({
     roll_no:{
         type: Number,
         maxlength: 32,
-        trim: true
+        trim: true,
+        unique: true
     },
     year:{
         type: Number,
