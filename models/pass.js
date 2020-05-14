@@ -11,7 +11,7 @@ const passSchema = new mongoose.Schema({
         default:"Home Pass",
         enum:["Out Pass","Home Pass"]
     },
-    status: {
+    status:{
         type: String,
         default: "Approved",
         enum:["Denied","Processing","Approved"]
