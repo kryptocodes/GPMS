@@ -16,17 +16,21 @@ router.post(
 );
 
 router.post("/signup_faculty",[
-  check("name","Name should be atleast 3 Character") .isLength({ min: 3 }),
-  check("email","E-mail is required").isEmail(),
-  check("password","Password should be atleast 8 Character").isLength({ min: 8 })
-],signup);
+  check("name","Name should be atleast 3 Character").isLength({ min: 3 }),
+  check("email","E-mail is required").contains("amrita.edu.in").isEmail(),
+  check("password","Password should be atleast 8 Character").isLength({ min: 8 }),
+  check("dept","Dept is required")
+],signup_faculty);
 
 router.post("/signup",[
-  check("name","Name should be atleast 3 Character") .isLength({ min: 3 }),
-  check("email","E-mail is required").isEmail(),
+  check("name","Name should be atleast 3 Character").isLength({ min: 3 }),
+  check("email","E-mail is required").contains("students.amrita.edu.in").isEmail(),
   check("room_no","Room no is required").isNumeric(),
+  check("dept","dept is required"),
+  check("address","address is required"),
+  check("mobile_no","mobile no should be 10 digit").isMobilePhone(),
   check("roll_no","Roll no is required").isNumeric().isLength({min: 10}),
-  check("password","Password should be atleast 8 Character").isLength({ min: 8 })
+  check("password","Password should be atleast 8 Character").isLength({ min: 8 }),
 ],signup);
   
 router.get("/signout",signout);

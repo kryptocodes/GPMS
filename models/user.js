@@ -16,6 +16,9 @@ var userSchema = new Schema({
         trim: true,
         unique: true
     },
+    dept:{
+        type:String,
+    },
     year:{
         type: Number,
         min:1,
@@ -38,6 +41,12 @@ var userSchema = new Schema({
     },
     address:{
         type: String,
+        maxlength: 256,
+        trim: true
+    },
+    mobile_no:{
+        type: Number,
+        maxlength:10,
         trim: true
     },
     img:{ data: Buffer,

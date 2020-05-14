@@ -28,11 +28,11 @@ exports.signin = (req,res) => {
     //put token in cookie
     res.cookie("token",token,{expire:new Date() + 999});
     //send response to front-end
-    const {_id, name, email, role,year,roll_no,room_no} = user;
+    const {_id, name, email, role,year,roll_no,room_no,dept,address,mobile_no} = user;
     if(role===1){
-         return res.json({token, user:{_id,name,email}})
+         return res.json({token, user:{_id,name,email,role,dept}})
     }else{
-        return res.json({token, user:{_id,name,email,role,year,roll_no,room_no}})   
+        return res.json({token, user:{_id,name,email,role,year,roll_no,room_no,dept,address,mobile_no}})   
     }
     });
     
