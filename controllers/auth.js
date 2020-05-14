@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var ejwt = require('express-jwt');
 
 exports.signin = (req,res) => {
-    const {email , password} = req.body;
+    const {email,password} = req.body;
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(422).json({
@@ -28,8 +28,12 @@ exports.signin = (req,res) => {
     //put token in cookie
     res.cookie("token",token,{expire:new Date() + 999});
     //send response to front-end
-    const {_id, name, email, role,year} = user;
-    return res.json({token, user:{_id,name,email,role,year}})
+    const {_id, name, email, role,year,roll_no,room_no} = user;
+    if(role===1){
+         return res.json({token, user:{_id,name,email}})
+    }else{
+        return res.json({token, user:{_id,name,email,role,year,roll_no,room_no}})   
+    }
     });
     
 };
@@ -54,6 +58,7 @@ exports.signup = (req,res) => {
             name: user.name,
             email: user.email,
             roll_no: user.roll_no,
+            room_no: user.room_no,
             id: user._id
         });
     })

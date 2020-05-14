@@ -9,7 +9,7 @@ const {signout,signup,signup_faculty,signin, isSignedIn} = require("../controlle
 router.post(
     "/signin",
     [
-      check("username", "username is required").isEmail(),
+      check("email", "username is required").isEmail(),
       check("password", "password field is required").isLength({ min: 1 })
     ],
     signin
@@ -24,8 +24,8 @@ router.post("/signup_faculty",[
 router.post("/signup",[
   check("name","Name should be atleast 3 Character") .isLength({ min: 3 }),
   check("email","E-mail is required").isEmail(),
-  check("Room No","Room no is required").isNumeric(),
-  check("Roll No","Roll no is required").isNumeric().isLength({min: 10}),
+  check("room_no","Room no is required").isNumeric(),
+  check("roll_no","Roll no is required").isNumeric().isLength({min: 10}),
   check("password","Password should be atleast 8 Character").isLength({ min: 8 })
 ],signup);
   
