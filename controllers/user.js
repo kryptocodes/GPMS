@@ -35,3 +35,38 @@ exports.updateUser =(req,res) =>{
       }    
     )
   }
+
+
+exports.updatePassword=(req,res)=>{
+    const {password} = req.body;
+    User.findOne(
+      {_id:req.profile._id},
+      (err,user) => {
+        if(err || !user){
+          return res.status(400).json({
+            error:"User not found"
+          })
+        }
+        if(password){
+          if(password.length<8){
+            return res.status(400).json({
+              error:"Password should be min 8 characters long"
+            })
+          } else {
+            user.password = password
+          }
+        }
+        user.save((err,updated) => {
+          if(err){
+            return res.status(400).json({
+              error: "user updated failed"
+            })
+          }
+          updated.salt = undefined;
+          updated.encry_password = undefined;
+          res.json(updated)
+        })
+      })
+}
+
+
