@@ -2,19 +2,35 @@ const mongoose = require("mongoose")
 const {ObjectId} = mongoose.Schema
 
 const passSchema = new mongoose.Schema({
-    info:{
+    user:{
         type: ObjectId,
-        ref:"User"
+        ref:"User",
+        required:true
     },
-    pass_type:{
+    exp_dep_time:{
         type:String,
-        default:"Home Pass",
-        enum:["Out Pass","Home Pass"]
+        required:true
+    },
+    exp_arr_time:{
+        type:String,
+        required: true
+    },
+    from_date:{
+        type:String,
+        required: true
+    },
+    to_date:{
+        type:String,
+        required: true
+    },
+    reason:{
+        type:String,
+        maxlength:128,
+        required:true
     },
     status:{
-        type: String,
-        default: "Approved",
-        enum:["Denied","Processing","Approved"]
+        type:Number,
+        default:0,
     },
     updated:Date,
 },{timestamps:true}
@@ -24,4 +40,4 @@ const passSchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model("pass",passSchema)
+module.exports = mongoose.model("Pass",passSchema)

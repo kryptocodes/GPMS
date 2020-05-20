@@ -12,7 +12,6 @@ var userSchema = new Schema({
     },
     roll_no:{
         type: Number,
-        maxlength: 32,
         trim: true,
         unique: true
     },
