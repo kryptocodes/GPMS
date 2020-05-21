@@ -30,16 +30,19 @@ exports.createHomePass = (req,res) => {
 
 
 exports.getPass = (req,res) => {
-    req.Pass.user.salt = undefined;
-    req.Pass.user.encry_password = undefined;
+    pass.info.salt=undefined;
+    pass.info.encry_password = undefined;
     return res.json(req.Pass)
 }
 
 
-
-
-
-
-
-
-
+exports.getAllPass = (req,res) =>{
+    Pass.find().exec((err, pass)=>{
+        if(err){
+            return res.status(400).json({
+                error: "No pass found"
+            });
+        }
+        res.json(pass);
+    })
+};

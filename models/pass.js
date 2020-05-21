@@ -1,32 +1,27 @@
 const mongoose = require("mongoose")
 const {ObjectId} = mongoose.Schema
 
+
 const passSchema = new mongoose.Schema({
-    user:{
+    info:{
         type: ObjectId,
-        ref:"User",
-        required:true
+        ref: "User"
     },
     exp_dep_time:{
         type:String,
-        required:true
     },
     exp_arr_time:{
         type:String,
-        required: true
     },
     from_date:{
         type:String,
-        required: true
     },
     to_date:{
         type:String,
-        required: true
     },
     reason:{
         type:String,
-        maxlength:128,
-        required:true
+        maxlength:128
     },
     status:{
         type:Number,
