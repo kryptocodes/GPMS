@@ -1,6 +1,5 @@
 const Pass = require("../models/pass")
 
-
 exports.getPassById = (req,res,next,id)=>{
     Pass.findById(id)
     .populate("user")
@@ -35,9 +34,20 @@ exports.getPass = (req,res) => {
     return res.json(req.Pass)
 }
 
+exports.getUserPass = (req,res) => {
+    Pass.find({info:req.profile._id}).populate("info","-salt -encry_password").exec((err, pass)=>{
+        if(err){
+            return res.status(400).json({
+                error: "No pass found"
+            });
+        }
+        res.json(pass);
+    })
+}
+
 
 exports.getAllPass = (req,res) =>{
-    Pass.find().exec((err, pass)=>{
+    Pass.find().populate("info","-salt -encry_password").exec((err, pass)=>{
         if(err){
             return res.status(400).json({
                 error: "No pass found"

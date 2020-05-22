@@ -7,6 +7,9 @@ const passSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     },
+    userid:{
+        type:String
+    },
     exp_dep_time:{
         type:String,
     },
@@ -22,6 +25,10 @@ const passSchema = new mongoose.Schema({
     reason:{
         type:String,
         maxlength:128
+    },
+    pass_type:{
+        type: String,
+        default:"HomePass"
     },
     status:{
         type:Number,
