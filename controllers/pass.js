@@ -56,3 +56,18 @@ exports.getAllPass = (req,res) =>{
         res.json(pass);
     })
 };
+
+exports.deletePass = (req,res) => {
+    let pass = req.Pass;
+    pass.remove((err,pass) =>{
+        if(err)
+        {
+            return res.status(400).json({
+                error:"failed to delete the paass"
+            })
+        }
+        res.json({
+            message:"Deletion was successful"
+        })
+        })
+}

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { getPassById,createHomePass,getPass,getUserPass,getAllPass } = require("../controllers/pass");
+const { getPassById,createHomePass,getPass,getUserPass,getAllPass,deletePass} = require("../controllers/pass");
 const {isSignedIn,isAuthenticated} = require("../controllers/auth");
 const {getUserById} = require("../controllers/user")
 
@@ -21,7 +21,7 @@ router.get("/pass/userpass/:userId",isSignedIn,isAuthenticated,getUserPass)
 router.get("/pass",getAllPass)
 
 //delete pass
-
+router.delete("/pass/delete/:passId/:userId",isSignedIn,isAuthenticated,deletePass)
 
 //list pass
 

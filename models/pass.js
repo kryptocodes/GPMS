@@ -31,8 +31,8 @@ const passSchema = new mongoose.Schema({
         default:"HomePass"
     },
     status:{
-        type:Number,
-        default:0,
+        type:String,
+        default:"Under Process"
     },
     updated:Date,
 },{timestamps:true}
