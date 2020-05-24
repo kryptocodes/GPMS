@@ -27,15 +27,19 @@ exports.createHomePass = (req,res) => {
 }
 
 
-
+//to authenticate the pass
 exports.getPass = (req,res) => {
     pass.info.salt=undefined;
     pass.info.encry_password = undefined;
     return res.json(req.Pass)
 }
 
+
+//display pass for the user
 exports.getUserPass = (req,res) => {
-    Pass.find({info:req.profile._id}).populate("info","-salt -encry_password").exec((err, pass)=>{
+    Pass.find({info:req.profile._id})
+    .populate("info","-salt -encry_password")
+    .exec((err, pass)=>{
         if(err){
             return res.status(400).json({
                 error: "No pass found"
@@ -45,7 +49,21 @@ exports.getUserPass = (req,res) => {
     })
 }
 
+//display student pass
+exports.getFacultyPass = (req,res) => {
+    Pass.find({status:"Under Process",dept:req.profile.dept,year:req.profile.year})
+    .populate("info","-salt -encry_password")
+    .exec((err,pass) =>{    
+        if(err){
+            return res.status(400).json({
+                error:"No pass found"
+            });
+        }
+        res.json(pass);
+    })
+}
 
+//read all pass
 exports.getAllPass = (req,res) =>{
     Pass.find().populate("info","-salt -encry_password").exec((err, pass)=>{
         if(err){

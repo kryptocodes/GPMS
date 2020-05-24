@@ -7,9 +7,6 @@ const passSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     },
-    userid:{
-        type:String
-    },
     exp_dep_time:{
         type:String,
     },
@@ -33,6 +30,12 @@ const passSchema = new mongoose.Schema({
     status:{
         type:String,
         default:"Under Process"
+    },
+    dept:{
+        type:String
+    },
+    year:{
+        type:Number
     },
     updated:Date,
 },{timestamps:true}

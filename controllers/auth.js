@@ -20,7 +20,7 @@ exports.signin = (req,res) => {
         }
         if(!user.authenticate(password)){
             return res.status(401).json({
-                error: "Email and Password do not match"
+                error: "Credentials were Incorrect"
             })
         }
         //create token
@@ -28,8 +28,8 @@ exports.signin = (req,res) => {
     //put token in cookie
     res.cookie("token",token,{expire:new Date() + 999});
     //send response to front-end
-    const {_id, name, email, role} = user;
-    return res.json({token, user:{_id,name,email,role}})
+    const {_id, name, email, role,dept,year} = user;
+    return res.json({token, user:{_id,name,email,role,dept,year}})
     });
     
 };
