@@ -2,7 +2,7 @@ const Pass = require("../models/pass")
 
 exports.getPassById = (req,res,next,id)=>{
     Pass.findById(id)
-    .populate("user")
+    .populate("info")
     .exec((err, pass)=>{
         if(err){
             return res.status(400).json({
@@ -29,10 +29,24 @@ exports.createHomePass = (req,res) => {
 
 //to authenticate the pass
 exports.getPass = (req,res) => {
-    pass.info.salt=undefined;
-    pass.info.encry_password = undefined;
     return res.json(req.Pass)
 }
+
+
+exports.updateStatus = (req, res) => {
+    Pass.updateOne(
+      { _id: req.Pass._id },
+      { $set: { status: req.body.status } },
+      (error, pass) => {
+        if (error) {
+          return res.status(400).json({
+            error:"No pass found"
+          });
+        }
+        res.json(pass);
+      }
+    );
+  };
 
 
 //display pass for the user
