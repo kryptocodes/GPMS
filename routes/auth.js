@@ -18,8 +18,7 @@ router.post(
 router.post("/signup_faculty",[
   check("name","Name should be atleast 3 Character").isLength({ min: 3 }),
   check("email","E-mail is required").contains("amrita.edu.in").isEmail(),
-  check("password","Password should be atleast 8 Character").isLength({ min: 8 }),
-  check("dept","Dept is required")
+  check("password","Password should be atleast 8 Character").isLength({ min: 8 })
 ],signup_faculty);
 
 router.post("/signup",[

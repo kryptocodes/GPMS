@@ -2,7 +2,7 @@ const Pass = require("../models/pass")
 
 exports.getPassById = (req,res,next,id)=>{
     Pass.findById(id)
-    .populate("info")
+    .populate("info","-salt -encry_password")
     .exec((err, pass)=>{
         if(err){
             return res.status(400).json({
@@ -27,15 +27,39 @@ exports.createHomePass = (req,res) => {
 }
 
 
-//to authenticate the pass
+//display pass
 exports.getPass = (req,res) => {
-    return res.json(req.Pass)
+    var query = {_id: req.params.passId};
+    Pass.findOne(query,(err,pass) =>{
+        if(pass == null){
+            return res.status(400).json({
+                error:"No pass found"
+            })
+        }
+        else{
+            return res.json(req.Pass)
+        }
+    })
 }
 
+exports.updatePass = (req,res) => {
+    Pass.updateOne(
+        {_id: req.Pass._id},
+        {$set:req.body},
+        (error,pass)=>{
+            if(error){
+                return res.status(400).json({
+                    error:"No pass found"
+                  });
+                }
+                res.json(pass);
+              }
+            );
+          };
 
 exports.updateStatus = (req, res) => {
     Pass.updateOne(
-      { _id: req.Pass._id },
+      { _id: req.Pass._id},
       { $set: { status: req.body.status } },
       (error, pass) => {
         if (error) {
@@ -53,6 +77,7 @@ exports.updateStatus = (req, res) => {
 exports.getUserPass = (req,res) => {
     Pass.find({info:req.profile._id})
     .populate("info","-salt -encry_password")
+    .sort('-createdAt')
     .exec((err, pass)=>{
         if(err){
             return res.status(400).json({
@@ -95,7 +120,7 @@ exports.deletePass = (req,res) => {
         if(err)
         {
             return res.status(400).json({
-                error:"failed to delete the paass"
+                error:"failed to delete the pass"
             })
         }
         res.json({

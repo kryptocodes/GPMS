@@ -7,6 +7,7 @@ const { getPassById,
     getUserPass,
     getFacultyPass,
     getAllPass,
+    updatePass,
     updateStatus,
     deletePass } = require("../controllers/pass");
 const {isSignedIn,isAuthenticated} = require("../controllers/auth");
@@ -29,6 +30,7 @@ router.get("/pass/student/:userId",isSignedIn,isAuthenticated,getFacultyPass)
 router.get("/pass",getAllPass)
 
 //update
+router.put("/pass/updatepass/:passId/:userId",isSignedIn,isAuthenticated,updatePass)
 router.put("/pass/:passId/status/:userId",isSignedIn,isAuthenticated,updateStatus)
 
 //delete pass

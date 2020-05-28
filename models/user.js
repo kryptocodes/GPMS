@@ -12,11 +12,10 @@ var userSchema = new Schema({
     },
     roll_no:{
         type: Number,
-        trim: true,
-        unique: true
+        trim: true
     },
     dept:{
-        type:String,
+        type:String
     },
     year:{
         type: Number,

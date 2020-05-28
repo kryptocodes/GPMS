@@ -43,6 +43,15 @@ exports.signup = (req,res) => {
             error: errors.array()[0].msg
         })
     }
+    
+    User.findOne(req.body.email).exec((err, user) => {
+        if (user) {
+            return res.status(400).json({
+                error: 'Email is taken'
+            });
+        }
+    })
+
     const user = new User(req.body);
     user.save((err,user)=>{
         if(err){
@@ -68,6 +77,14 @@ exports.signup_faculty = (req,res) => {
             error: errors.array()[0].msg
         })
     }
+
+    User.findOne(req.body.email).exec((err, user) => {
+        if (user) {
+            return res.status(400).json({
+                error: 'Email is taken'
+            });
+        }
+    })
     const user = new User(req.body);
     user.save((err,user)=>{
         if(err){
