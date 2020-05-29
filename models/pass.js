@@ -38,12 +38,10 @@ const passSchema = new mongoose.Schema({
         type:Number
     },
     exit:{
-        time:String,
-        date:String
+        type:String
     },
     entry:{
-        time:String,
-        date:String
+        type:String
     },
     updated:Date,
 },{timestamps:true}

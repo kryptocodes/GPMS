@@ -29,8 +29,8 @@ exports.createHomePass = (req,res) => {
 
 //display pass
 exports.getPass = (req,res) => {
-    var query = {_id: req.params.passId};
-    Pass.findOne(query,(err,pass) =>{
+    var passID = {_id: req.params.passId};
+    Pass.findOne(passID,(err,pass) =>{
         if(pass == null){
             return res.status(400).json({
                 error:"No pass found"
@@ -56,6 +56,21 @@ exports.updatePass = (req,res) => {
               }
             );
           };
+
+exports.updatePost = (req,res) => {
+    Pass.updateOne(
+        { _id: req.Pass._id},
+        {$set:{exit:req.body.exit,entry:req.body.entry}},
+        (error, pass) => {
+            if (error) {
+              return res.status(400).json({
+                error:"No pass found"
+              });
+            }
+            res.json(pass);
+          }
+    )
+}
 
 exports.updateStatus = (req, res) => {
     Pass.updateOne(
