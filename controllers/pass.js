@@ -87,6 +87,21 @@ exports.updateStatus = (req, res) => {
     );
   };
 
+//security dashboard 
+exports.getLogs = (req,res) => {
+    Pass.find({entry:{$ne: null}})
+    .populate("info","-salt -encry_password")
+    .sort('-createdAt')
+    .exec((err, pass)=>{
+        if(err){
+            return res.status(400).json({
+                error: "No pass found"
+            });
+        }
+        res.json(pass);
+    })
+}
+
 
 //display pass for the user
 exports.getUserPass = (req,res) => {

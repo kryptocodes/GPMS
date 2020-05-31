@@ -7,6 +7,7 @@ const { getPassById,
     getUserPass,
     getFacultyPass,
     getAllPass,
+    getLogs,
     updatePass,
     updateStatus,
     updatePost,
@@ -28,6 +29,7 @@ router.post("/pass/homepass/:userId",isSignedIn,isAuthenticated,createHomePass)
 router.get("/pass/:passId",getPass)
 router.get("/pass/userpass/:userId",isSignedIn,isAuthenticated,getUserPass)
 router.get("/pass/student/:userId",isSignedIn,isAuthenticated,getFacultyPass)
+router.get("/pass/security/logs",getLogs)
 router.get("/pass",getAllPass)
 
 //update
