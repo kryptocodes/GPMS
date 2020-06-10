@@ -10,7 +10,8 @@ const { getPassById,
     getLogs,
     updatePass,
     updateStatus,
-    updatePost,
+    entryCheck,
+    exitCheck,
     deletePass } = require("../controllers/pass");
 const {isSignedIn,isAuthenticated} = require("../controllers/auth");
 const {getUserById} = require("../controllers/user")
@@ -35,7 +36,10 @@ router.get("/pass",getAllPass)
 //update
 router.put("/pass/updatepass/:passId/:userId",isSignedIn,isAuthenticated,updatePass)
 router.put("/pass/:passId/status/:userId",isSignedIn,isAuthenticated,updateStatus)
-router.put("/pass/:passId/post/:userId",isSignedIn,isAuthenticated,updatePost)
+
+//gate
+router.put("/pass/:passId/entry/:userId",isSignedIn,isAuthenticated,entryCheck)
+router.put("/pass/:passId/exit/:userId",isSignedIn,isAuthenticated,exitCheck)
 
 //delete pass
 router.delete("/pass/delete/:passId/:userId",isSignedIn,isAuthenticated,deletePass)

@@ -57,10 +57,10 @@ exports.updatePass = (req,res) => {
             );
           };
 
-exports.updatePost = (req,res) => {
+exports.entryCheck = (req,res) => {
     Pass.updateOne(
         { _id: req.Pass._id},
-        {$set:{exit:req.body.exit,entry:req.body.entry}},
+        {$set:{entry:req.body.entry}},
         (error, pass) => {
             if (error) {
               return res.status(400).json({
@@ -69,6 +69,21 @@ exports.updatePost = (req,res) => {
             }
             res.json(pass);
           }
+    )
+}
+
+exports.exitCheck = (req,res) => {
+    Pass.updateOne(
+        {_id: req.Pass._id},
+        {$set:{exit:req.body.exit}},
+        (error,pass) => {
+            if(error) {
+                return res.status(400).json({
+                    error:"No pass found"
+                })
+            }
+            res.json(pass)
+        }
     )
 }
 
@@ -117,6 +132,8 @@ exports.getUserPass = (req,res) => {
         res.json(pass);
     })
 }
+
+
 
 //display student pass
 exports.getFacultyPass = (req,res) => {
