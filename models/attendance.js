@@ -6,6 +6,9 @@ const attenSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     },
+    status:{
+        type:String
+    },
     date:{
         type:String
     },

@@ -12,11 +12,23 @@ exports.getUserById = (req, res, next, id) => {
     });
   };
 
-exports.getUser = (req, res)=>{
+exports.getUser = (req, res) =>{
     req.profile.salt = undefined;
     req.profile.encry_password = undefined;
     return res.json(req.profile)
 }
+
+exports.getStudent = (req,res) =>{
+  User.find({role:0})
+  .exec((err, user)=>{
+      if(err){
+          return res.status(400).json({
+              error: "No student found in dB"
+          });
+      }
+      res.json(user);
+  })
+};
 
 exports.updateUser =(req,res) =>{
     User.findByIdAndUpdate(
