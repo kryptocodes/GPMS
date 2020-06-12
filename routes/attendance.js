@@ -14,7 +14,7 @@ router.param("userId",getUserById)
 
 //routes
 //register attendance
-router.post("/attendance/:userId",isSignedIn,isAuthenticated,getUserById,addAtten)
+router.post("/attendance/:userId",isSignedIn,isAuthenticated,addAtten)
 
 
 //display

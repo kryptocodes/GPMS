@@ -11,9 +11,6 @@ const attenSchema = new mongoose.Schema({
     },
     date:{
         type:String
-    },
-    time:{
-        type:String
     }
 },{timestamps:true})
 
