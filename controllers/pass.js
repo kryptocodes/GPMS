@@ -149,6 +149,20 @@ exports.getFacultyPass = (req,res) => {
     })
 }
 
+//warden control
+exports.getWardenPass = (req,res) => {
+    Pass.find({status:"Approved"})
+        .populate("info","-salt -encry_password")
+        .exec((err,pass) => {
+            if(err){
+                return res.status(400).json({
+                    error: "No pass found"
+                });
+            }
+            res.json(pass);
+        })
+};
+
 //read all pass
 exports.getAllPass = (req,res) =>{
     Pass.find().populate("info","-salt -encry_password").exec((err, pass)=>{
