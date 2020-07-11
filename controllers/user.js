@@ -20,17 +20,18 @@ exports.getUser = (req, res) =>{
 
 exports.getStudent = (req,res) =>{
   User.find({role:0})
-  .exec((err, user)=>{
+  .select('-salt -encry_password')
+  .exec((err, user) => {
       if(err){
           return res.status(400).json({
               error: "No student found in dB"
           });
       }
-      res.json(user);
+      res.json(user)
   })
 };
 
-exports.updateUser =(req,res) =>{
+exports.updateUser = (req,res) =>{
     User.findByIdAndUpdate(
       {_id: req.profile._id},
       {$set: req.body},
