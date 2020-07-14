@@ -18,6 +18,19 @@ exports.getUser = (req, res) =>{
     return res.json(req.profile)
 }
 
+exports.getStudentInfo = (req,res) =>{
+  User.find({role:0,dept:req.profile.dept})
+  .select('-salt -encry_password')
+  .exec((err,user) => {
+    if(err){
+      return res.status(400).json({
+        error:"No Student found in dB"
+      })
+    }
+    res.json(user)
+  })
+}
+
 exports.getStudent = (req,res) =>{
   User.find({role:0})
   .select('-salt -encry_password')

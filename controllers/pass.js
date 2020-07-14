@@ -59,7 +59,7 @@ exports.updatePass = (req,res) => {
 
 exports.entryCheck = (req,res) => {
     Pass.updateOne(
-        { _id: req.Pass._id},
+        {_id: req.Pass._id},
         {$set:{entry:req.body.entry}},
         (error, pass) => {
             if (error) {
@@ -120,7 +120,7 @@ exports.getLogs = (req,res) => {
 
 //display pass for the user
 exports.getUserPass = (req,res) => {
-    Pass.find({info:req.profile._id})
+    Pass.find({info:req.profile._id,entry:null})
     .populate("info","-salt -encry_password")
     .sort('-createdAt')
     .exec((err, pass)=>{
