@@ -34,8 +34,4 @@ router.post("/signup",[
   
 router.get("/signout",signout);
 
-router.get("/backend",isSignedIn,(req,res)=>{
-  res.json(req.auth)
-});
-
 module.exports = router;

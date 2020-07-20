@@ -13,6 +13,7 @@ const { getPassById,
     updateStatus,
     entryCheck,
     exitCheck,
+    isValid,
     deletePass } = require("../controllers/pass");
 const {isSignedIn,isAuthenticated} = require("../controllers/auth");
 const {getUserById} = require("../controllers/user")

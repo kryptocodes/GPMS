@@ -104,9 +104,6 @@ exports.signup_faculty = (req,res) => {
 
 exports.signout = (req,res) => {
     res.clearCookie("token")
-    res.json({
-        message:"User signout"
-    })
 }
 
 
